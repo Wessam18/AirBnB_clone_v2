@@ -14,3 +14,7 @@ class Amenity(BaseModel, Base):
 
     if storage_type == 'db':
         name = column(String(128), nullable=False)
+        place_amenities = relationship("Place", secondary="place_amenity")
+
+    else:
+        name = ""

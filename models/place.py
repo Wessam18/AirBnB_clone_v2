@@ -14,8 +14,8 @@ class Place(BaseModel, Base):
     storage_type = os.getenv('HBNB_TYPE_STORAGE')
 
     if storage_type == 'db':
-        city_id = column(String(60), nullable=False, ForeignKey="cities.id")
-        user_id = column(String(60), nullable=False, ForeignKey="users.id")
+        city_id = column(String(60), ForeignKey("cities.id"), nullable=False)
+        user_id = column(String(60), ForeignKey("users.id"), nullable=False)
         name = column(String(128), nullable=False)
         description = column(String(1024), nullable=True)
         number_rooms = column(Integer, nullable=False, defualt=0)

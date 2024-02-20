@@ -121,32 +121,34 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
 
-        #wessam edit to handle task 2
         argList = args.split()
         className = argList[0]
+        params = argList[1:]
 
         if className not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
-        param = {}
-        for x in argList[1:]:
-            if "=" in x:
-                key, value = x.split("=")
-                if value[0] == '"' and value[-1] == '"' and len(value) >= 2:
-                    value = value.strip('"').replace("_", " ")
-                else:
-                    try:
-                        if "." in value:
-                            return float(value)
-                        else:
-                            return int(value)
-                    except ValueError:
-                        continue
-                param[key] = value
-        new_instance = HBNBCommand.classes[className](**param)
+
+        # Create an instance
+        new_instance = HBNBCommand.classes[className]()
+
+        for x in params:
+            key = x.split("=")[0]
+            value = x.split("=")[1]
+            # escape double quote and replace _ by ' '
+            value = value.replace('"', '\"')
+            value = value.replace("_", " ")
+            # make the value float or integer if number found
+            if "." in value:
+                value = float(value)
+            elif value.isdigit():
+                value = int(value)
+            else:
+                # put the value to the class property
+                setattr(new_instance, key, value)
+
         new_instance.save()
         print(new_instance.id)
-
 
     def help_create(self):
         """ Help information for the create method """
@@ -209,7 +211,7 @@ class HBNBCommand(cmd.Cmd):
         key = c_name + "." + c_id
 
         try:
-            del(storage.all()[key])
+            del (storage.all()[key])
             storage.save()
         except KeyError:
             print("** no instance found **")
@@ -341,6 +343,7 @@ class HBNBCommand(cmd.Cmd):
         """ Help information for the update class """
         print("Updates an object with new information")
         print("Usage: update <className> <id> <attName> <attVal>\n")
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()

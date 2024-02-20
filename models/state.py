@@ -11,15 +11,15 @@ class State(BaseModel, Base):
     """ State class """
     __tablename__ = "states"
 
-    name = column(String(128), nullable=False)
-    cities = relationship("City", cascade="all, delete-orphan", backref="state")
+    #name = column(String(128), nullable=False)
+    #cities = relationship("City", cascade="all, delete-orphan", backref="state")
 
-    @property
-    def cities(self):
-        """getter attribute"""
-        from models import storage
-        cities_list = []
-        for i in storage.all(City).values():
-            if i.state.id == self.id:
-                cities_list.append(i)
-        return cities_list
+#    @property
+ #   def cities(self):
+  #      """getter attribute"""
+   #     from models import storage
+    #    cities_list = []
+     #   for i in storage.all(City).values():
+      #      if i.state.id == self.id:
+       #         cities_list.append(i)
+       # return cities_list

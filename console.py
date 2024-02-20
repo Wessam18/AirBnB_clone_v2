@@ -2,6 +2,7 @@
 """ Console Module """
 import cmd
 import sys
+import shlex
 from models.base_model import BaseModel
 from models.__init__ import storage
 from models.user import User
@@ -121,30 +122,30 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
 
-        argList = args.split()
-        className = argList[0]
-        params = argList[1:]
+        # make the args like shell
+        arguments = shlex.split(args)
+        className = params[0]
+        params = arguments[1:]
 
         if className not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
 
-        # Create an instance
+        # create new instance
         new_instance = HBNBCommand.classes[className]()
 
         for x in params:
-            key = x.split("=")[0]
-            value = x.split("=")[1]
-            # escape double quote and replace _ by ' '
-            value = value.replace('"', '\"')
-            value = value.replace("_", " ")
-            # make the value float or integer if number found
-            if "." in value:
+            key = x.split('=')[0]
+            value = x.split('=')[0]
+
+            value = value.replace('"', r'\"')
+            value = value.replace('_', ' ')
+
+            if '.' in value:
                 value = float(value)
             elif value.isdigit():
                 value = int(value)
             else:
-                # put the value to the class property
                 setattr(new_instance, key, value)
 
         new_instance.save()

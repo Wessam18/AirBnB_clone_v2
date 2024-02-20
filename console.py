@@ -121,9 +121,9 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
 
-        # wessam edit to handle task 2
         argList = args.split()
         className = argList[0]
+        params = argList[1:]
 
         if className not in HBNBCommand.classes:
             print("** class doesn't exist **")
@@ -132,20 +132,20 @@ class HBNBCommand(cmd.Cmd):
         # Create an instance
         new_instance = HBNBCommand.classes[className]()
 
-        for x in argList[1:]:
-            if "=" in x:
-                key, value = x.split("=")
-                # escape double quote and replce _ by ' '
-                if value[0] == '"' and value[-1] == '"' and len(value) >= 2:
-                    value = value.strip('"').replace("_", " ")
-                # make the value float or intger if number found
-                if "." in value:
-                    value = float(value)
-                elif value.isdigit():
-                    value = int(value)
-                else:
-                    # put the value to the class property
-                    new_instance.key = value
+        for x in params:
+            key = x.split("=")[0]
+            value = x.split("=")[1]
+            # escape double quote and replace _ by ' '
+            value = value.replace('"', '\"')
+            value = value.replace("_", " ")
+            # make the value float or integer if number found
+            if "." in value:
+                value = float(value)
+            elif value.isdigit():
+                value = int(value)
+            else:
+                # put the value to the class property
+                setattr(new_instance, key, value)
 
         new_instance.save()
         print(new_instance.id)

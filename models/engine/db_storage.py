@@ -41,4 +41,25 @@ class DBStorage:
         objects = {}
         for x in classes:
             for obj in self.__session.query(x).all():
-                
+                key = f"{obj.__name__}.{obj.id}"
+                objects[key] = obj
+        return objects
+
+    def new(self, obj):
+        """new obj"""
+        self.__session.add(obj)
+
+    def save(self):
+        """to save"""
+        self.__session.commit()
+
+    def delete(self, obj=None):
+        """to delete"""
+        if obj:
+            self.__session.delete(obj)
+
+    def reload(self):
+        """to reload"""
+        Base.metadata.create_all(self.__engine)
+        Session = scoped_session(bind=self.__engine, expire_on_commit=False)
+        self.__session = Session()

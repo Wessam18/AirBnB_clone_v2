@@ -11,6 +11,8 @@ from models.city import City
 from models.amenity import Amenity
 from models.review import Review
 
+from datetime import datetime
+
 
 class HBNBCommand(cmd.Cmd):
     """ Contains the functionality for the HBNB console"""
@@ -118,13 +120,34 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             print("** class name missing **")
             return
-        elif args not in HBNBCommand.classes:
+
+        #wessam edit to handle task 2
+        argList = args.split()
+        className = argList[0]
+
+        if className not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
-        new_instance = HBNBCommand.classes[args]()
-        storage.save()
+        param = {}
+        for x in argList[1:]:
+            if "=" in x:
+                key, value = x.split("=")
+                if value[0] == '"' and value[-1] == '"' and len(value) >= 2:
+                    value = value.strip('"').replace("_", " ")
+                else:
+                    try:
+                        if "." in value:
+                            return float(value)
+                        else:
+                            return int(value)
+                    except ValueError:
+                        continue
+                param[key] = value
+
+        new_instance = HBNBCommand.classes[className](**param)
+        new_instance.save()
         print(new_instance.id)
-        storage.save()
+
 
     def help_create(self):
         """ Help information for the create method """

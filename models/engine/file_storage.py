@@ -23,10 +23,13 @@ class FileStorage:
 
     def save(self):
         """Saves storage dictionary to file"""
+        from datetime import datetime
         with open(FileStorage.__file_path, 'w') as f:
             temp = {}
             temp.update(FileStorage.__objects)
             for key, val in temp.items():
+                val_dict = val.to_dict()
+                val_dict['updated_at'] = datetime.strptime(val_dict['updated_at'], '%Y-%m-%dT%H:%M:%S.%f')
                 temp[key] = val.to_dict()
             json.dump(temp, f)
 
@@ -39,6 +42,7 @@ class FileStorage:
         from models.city import City
         from models.amenity import Amenity
         from models.review import Review
+        import os
 
         classes = {
                     'BaseModel': BaseModel, 'User': User, 'Place': Place,
@@ -48,6 +52,8 @@ class FileStorage:
         try:
             temp = {}
             with open(FileStorage.__file_path, 'r') as f:
+                if os.stat(FileStorage.__file_path).st_size == 0:
+                    return
                 temp = json.load(f)
                 for key, val in temp.items():
                     self.all()[key] = classes[val['__class__']](**val)

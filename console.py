@@ -141,10 +141,11 @@ class HBNBCommand(cmd.Cmd):
             value = value.replace('"', r'\"')
             value = value.replace('_', ' ')
 
-            if '.' in value:
-                value = float(value)
-            elif value.isdigit():
-                value = int(value)
+            if value.isdigit():
+                if '.' in value:
+                    value = float(value)
+                else:
+                    value = int(value)
 
             setattr(new_instance, key, value)
 

@@ -41,7 +41,7 @@ class DBStorage:
         objects = {}
         for x in classes:
             for obj in self.__session.query(x).all():
-                key = f"{obj.__name__}.{obj.id}"
+                key = f"{obj.__class__.__name__}.{obj.id}"
                 objects[key] = obj
         return objects
 

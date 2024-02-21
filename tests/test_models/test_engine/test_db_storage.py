@@ -22,6 +22,7 @@ DBStorage = db_storage.DBStorage
 classes = {"Amenity": Amenity, "City": City, "Place": Place,
            "Review": Review, "State": State, "User": User}
 
+
 @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') != 'db', "test not relevant")
 class TestDB(unittest.TestCase):
     """class test db"""
@@ -49,6 +50,7 @@ class TestFileStorage(unittest.TestCase):
     @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
     def test_save(self):
         """Test that save properly saves objects to file.json"""
+
 
 class TestDBStorageDocs(unittest.TestCase):
     """Tests to check the documentation and style of DBStorage class"""

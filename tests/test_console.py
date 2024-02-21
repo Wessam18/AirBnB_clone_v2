@@ -16,6 +16,7 @@ from models.amenity import Amenity
 from models.review import Review
 from console import HBNBCommand
 
+
 class TestConsole(unittest.TestCase):
     """ Test Console """
 

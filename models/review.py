@@ -9,7 +9,7 @@ import os
 class Review(BaseModel, Base):
     """ Review classto store review information """
     __tablename__ = "reviews"
-    
+
     storage_type = os.getenv('HBNB_TYPE_STORAGE')
 
     if storage_type == 'db':

@@ -16,7 +16,7 @@ import os
 
 class DBStorage:
     """new class"""
-    __engine =  None
+    __engine = None
     __session = None
 
     def __init__(self):

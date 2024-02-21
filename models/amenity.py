@@ -9,7 +9,7 @@ import os
 class Amenity(BaseModel, Base):
     """amenity class"""
     __tablename__ = "amenities"
-    
+
     storage_type = os.getenv('HBNB_TYPE_STORAGE')
 
     if storage_type == 'db':

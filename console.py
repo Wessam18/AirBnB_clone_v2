@@ -133,7 +133,7 @@ class HBNBCommand(cmd.Cmd):
 
         # create new instance
         new_instance = HBNBCommand.classes[className]()
-
+ 
         for x in params:
             key = x.split('=')[0]
             value = x.split('=')[1]
@@ -145,8 +145,8 @@ class HBNBCommand(cmd.Cmd):
                 value = float(value)
             elif value.isdigit():
                 value = int(value)
-            else:
-                setattr(new_instance, key, value)
+ 
+            setattr(new_instance, key, value)
 
         new_instance.save()
         print(new_instance.id)

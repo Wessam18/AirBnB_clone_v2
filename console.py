@@ -124,7 +124,7 @@ class HBNBCommand(cmd.Cmd):
 
         # make the args like shell
         arguments = shlex.split(args)
-        className = params[0]
+        className = arguments[0]
         params = arguments[1:]
 
         if className not in HBNBCommand.classes:
@@ -136,7 +136,7 @@ class HBNBCommand(cmd.Cmd):
 
         for x in params:
             key = x.split('=')[0]
-            value = x.split('=')[0]
+            value = x.split('=')[1]
 
             value = value.replace('"', r'\"')
             value = value.replace('_', ' ')

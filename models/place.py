@@ -23,8 +23,8 @@ class Place(BaseModel, Base):
     storage_type = os.getenv('HBNB_TYPE_STORAGE')
 
     if storage_type == 'db':
-        city_id = Column(String(60), ForeignKey("cities.id"), nullable=False)
-        user_id = Column(String(60), ForeignKey("users.id"), nullable=False)
+        city_id = Column(String(60), ForeignKey('cities.id'), nullable=False)
+        user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
         name = Column(String(128), nullable=False)
         description = Column(String(1024), nullable=True)
         number_rooms = Column(Integer, nullable=False, default=0)
@@ -51,16 +51,16 @@ class Place(BaseModel, Base):
         longitude = 0.0
         amenity_ids = []
 
-    @property
-    def reviews(self):
-        """reviews attribute"""
-        from models import storage
-        from models.review import Review
-        reviews_list = []
-        for i in storage.all(Review).values():
-            if i.place.id == self.id:
-                reviews_list.append(i)
-        return reviews_list
+    #@property
+    #def reviews(self):
+    #    """reviews attribute"""
+    #    from models import storage
+    #    from models.review import Review
+    #    reviews_list = []
+    #    for i in storage.all(Review).values():
+    #        if i.place.id == self.id:
+    #            reviews_list.append(i)
+    #    return reviews_list
 
     @property
     def amenities(self):

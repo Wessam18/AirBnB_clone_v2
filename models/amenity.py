@@ -9,12 +9,13 @@ import os
 class Amenity(BaseModel, Base):
     """amenity class"""
     __tablename__ = "amenities"
-    
+
     storage_type = os.getenv('HBNB_TYPE_STORAGE')
 
     if storage_type == 'db':
         name = Column(String(128), nullable=False)
-        place_amenities = relationship("Place", secondary="place_amenity")
+        place_amenities = relationship(
+                "Place", secondary="place_amenity")
 
     else:
         name = ""

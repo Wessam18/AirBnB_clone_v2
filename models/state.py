@@ -7,6 +7,7 @@ from sqlalchemy.orm import relationship
 import os
 from models.city import City
 
+
 class State(BaseModel, Base):
     """ State class """
     __tablename__ = "states"
@@ -15,7 +16,8 @@ class State(BaseModel, Base):
 
     if storage_type == 'db':
         name = Column(String(128), nullable=False)
-        cities = relationship("City", cascade="all, delete-orphan", backref="state")
+        cities = relationship(
+                "City", cascade="all, delete-orphan", backref="state")
 
     else:
         name = ""
@@ -29,4 +31,3 @@ class State(BaseModel, Base):
             if i.state.id == self.id:
                 cities_list.append(i)
         return cities_list
-    

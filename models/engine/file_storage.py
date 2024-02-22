@@ -29,7 +29,8 @@ class FileStorage:
             temp.update(FileStorage.__objects)
             for key, val in temp.items():
                 val_dict = val.to_dict()
-                val_dict['updated_at'] = datetime.strptime(val_dict['updated_at'], '%Y-%m-%dT%H:%M:%S.%f')
+                val_dict['updated_at'] = datetime.strptime(
+                    val_dict['updated_at'], '%Y-%m-%dT%H:%M:%S.%f')
                 temp[key] = val.to_dict()
             json.dump(temp, f)
 

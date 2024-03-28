@@ -20,6 +20,21 @@ class Place(BaseModel, Base):
             primary_key=True, nullable=False)
     )
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     storage_type = os.getenv('HBNB_TYPE_STORAGE')
 
     if storage_type == 'db':

@@ -1,39 +1,39 @@
 #!/usr/bin/python3
-"""Flask web Application"""
+""" Start a web application """
 
 from flask import Flask
 
 
-app = Flask(__name__)
+web_app = Flask(__name__)
 
 
-@app.route("/", strict_slashes=False)
-def hello():
+@web_app.route("/", strict_slashes=False)
+def Home():
     return "Hello HBNB!"
 
 
-@app.route("/hbnb", strict_slashes=False)
-def hbnb():
+@web_app.route("/hbnb", strict_slashes=False)
+def prompt():
     return "HBNB"
 
 
-@app.route("/c/<text>", strict_slashes=False)
-def c(text):
-    new_text = text.replace('_', ' ')
-    return "C {}".format(new_text)
+@web_app.route("/c/<text>", strict_slashes=False)
+def language(text):
+    new = text.replace('_', ' ')
+    return f"C {new}"
 
 
-@app.route("/python", strict_slashes=False)
-@app.route("/python/<text>", strict_slashes=False)
+@web_app.route("/python/<text>", strict_slashes=False)
 def python(text="is cool"):
-    new_text = text.replace('_', ' ')
-    return "Python {}".format(new_text)
+    new = text.replace('_', ' ')
+    return f"Python {new}"
 
 
-@app.route("/number/<int:n>", strict_slashes=False)
-def number(n):
-    return "{} is a number".format(n)
+@web_app.route("/number/<n>", strict_slashes=False)
+def integer(n):
+    if isinstance(n, int):
+        return "n is a number"
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    web_app.run(host="0.0.0.0", port=5000)

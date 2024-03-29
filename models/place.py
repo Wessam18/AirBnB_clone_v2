@@ -20,21 +20,6 @@ class Place(BaseModel, Base):
             primary_key=True, nullable=False)
     )
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     storage_type = os.getenv('HBNB_TYPE_STORAGE')
 
     if storage_type == 'db':
@@ -76,6 +61,7 @@ class Place(BaseModel, Base):
             if i.place.id == self.id:
                 reviews_list.append(i)
         return reviews_list
+
 
     @property
     def amenities(self):

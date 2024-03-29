@@ -1,17 +1,16 @@
 #!/usr/bin/python3
 """ Start a web application """
 
-
 from flask import Flask
 
 
-app = Flask(__name__)
+web_app = Flask(__name__)
 
+@web_app.route("/", strict_slashes=False)
 
-@app.route("/", strict_slashes=False)
-def Hello():
+def Home():
     return "Hello HBNB!"
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    web_app.run(host="0.0.0.0", port=5000)

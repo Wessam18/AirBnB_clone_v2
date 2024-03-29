@@ -33,7 +33,7 @@ def python(text="is cool"):
 @web_app.route("/number/<n>", strict_slashes=False)
 def integer(n):
     if isinstance(n, int):
-        return "n is a number"
+        return f"{n} is a number"
     else:
         pass
 

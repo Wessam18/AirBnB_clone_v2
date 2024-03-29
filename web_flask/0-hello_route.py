@@ -6,8 +6,8 @@ from flask import Flask
 
 web_app = Flask(__name__)
 
-@web_app.route("/", strict_slashes=False)
 
+@web_app.route("/", strict_slashes=False)
 def Home():
     return "Hello HBNB!"
 

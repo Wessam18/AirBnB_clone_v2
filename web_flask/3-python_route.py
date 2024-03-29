@@ -23,6 +23,7 @@ def language(text):
     return f"C {new}"
 
 
+@web_app.route("/python", strict_slashes=False)
 @web_app.route("/python/<text>", strict_slashes=False)
 def python(text="is cool"):
     new = text.replace('_', ' ')

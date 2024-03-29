@@ -34,8 +34,6 @@ def python(text="is cool"):
 def integer(n):
     if isinstance(n, int):
         return f"{n} is a number"
-    else:
-        pass
 
 
 if __name__ == "__main__":

@@ -30,13 +30,9 @@ def python(text="is cool"):
     return f"Python {new}"
 
 
-@web_app.route("/number/<n>", strict_slashes=False)
+@web_app.route("/number/<int:n>", strict_slashes=False)
 def integer(n):
-    try:
-        n = int(n)
-        return f"{n} is a number"
-    except ValueError:
-        pass
+    return f"{n} is a number"
 
 
 if __name__ == "__main__":

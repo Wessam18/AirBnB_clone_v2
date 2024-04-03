@@ -22,12 +22,12 @@ class State(BaseModel, Base):
     else:
         name = ""
 
-    @property
-    def cities(self):
-        """getter attribute"""
-        from models import storage
-        cities_list = []
-        for i in storage.all(City).values():
-            if i.state.id == self.id:
-                cities_list.append(i)
-        return cities_list
+        @property
+        def cities(self):
+            """getter attribute"""
+            from models import storage
+            cities_list = []
+            for i in storage.all(City).values():
+                if i.state.id == self.id:
+                    cities_list.append(i)
+            return cities_list

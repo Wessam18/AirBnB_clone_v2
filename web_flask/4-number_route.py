@@ -36,7 +36,7 @@ def integer(n):
         n = int(n)
         return f"{n} is a number"
     except ValueError:
-        return "Not a valid number"
+        pass
 
 
 if __name__ == "__main__":

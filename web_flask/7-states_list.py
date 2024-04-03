@@ -4,7 +4,8 @@ Script that starts a Flask web application
 """
 from flask import Flask, render_template
 from models import storage
-from models.state import State
+from operator import attrgetter
+
 
 app = Flask(__name__)
 
@@ -17,11 +18,9 @@ def teardown_db():
 
 @app.route('/states_list', strict_slashes=False)
 def states_list():
-    """Display a HTML page with a list of all State objects"""
-    states = storage.all(State).values()
-    sorted_states = sorted(states)
-
-    return render_template('7-states_list.html', states=sorted_states)
+    """Display a HTML page with the states listed in alphabetical order"""
+    states = sorted(list(storage.all("State").values()), key=attrgetter('name'))
+    return render_template('7-states_list.html', states=states)
 
 
 if __name__ == '__main__':

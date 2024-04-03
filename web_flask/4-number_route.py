@@ -32,8 +32,11 @@ def python(text="is cool"):
 
 @web_app.route("/number/<n>", strict_slashes=False)
 def integer(n):
-    if isinstance(n, int):
+    try:
+        n = int(n)
         return f"{n} is a number"
+    except ValueError:
+        return "Not a valid number"
 
 
 if __name__ == "__main__":

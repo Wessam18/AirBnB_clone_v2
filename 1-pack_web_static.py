@@ -9,6 +9,7 @@ from datetime import datetime
 
 @task
 def do_pack(c):
+    """do"""
     # Generate timestamp for the archive name
     timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
     archive_name = f"web_static_{timestamp}.tgz"

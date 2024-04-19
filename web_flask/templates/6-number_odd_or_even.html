@@ -5,7 +5,11 @@
     </HEAD>
     <BODY>
         <H1>
-            Number: {{ n }} {% if n % 2 == 0 %}is even{% else %}is odd{% endif %}
+            {% if n % 2 == 0 %}
+                Number: {{ n }} is even
+            {% else %}
+                Number: {{ n }} is odd
+            {% endif %}
         </H1>
     </BODY>
 </HTML>
